@@ -2,6 +2,8 @@ import pygame
 from constants import * # Imports constants such as SCREEN_WIDTH & SCREEN_HEIGHT
 from circleshape import CircleShape
 from player import Player # Imports Player Class
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 def main():
 	# Initialize pygame
 	pygame.init()
@@ -18,9 +20,17 @@ def main():
 	# Create groups for sprite management
 	updatable = pygame.sprite.Group()
 	drawable = pygame.sprite.Group()
+	asteroids = pygame.sprite.Group()
+
+
 
 	#Set Player's containers to add instances to both groups
 	Player.containers = (updatable, drawable)
+	Asteroid.containers = (asteroids, updatable, drawable)
+	AsteroidField.containers = updatable
+
+	# Instantiate the Asteroid Field
+	asteroid_field = AsteroidField()
 
 	# Create the player instance (added automatically to both groups)
 	player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
